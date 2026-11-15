@@ -51,11 +51,12 @@ function update(product, id) {
 
 function deleteProductFromID(id) {
     return new Promise(async (resolve, reject) => {
-        const newProducts = products.filter(p => p.id != id)
+        const productToDelete = products.find(p => p.id === id)
+        const newProducts = products.filter(p => p.id !== id)
 
         // Updating our json file
         await writeData('./data/products.json', newProducts)
-        resolve(products.filter(p => p.id === id)) // This returns the Deleted Product
+        resolve(productToDelete) // This returns the Deleted Product
     })
 
 }

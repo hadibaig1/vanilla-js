@@ -93,9 +93,16 @@ async function deleteProduct(req, res, id) {
     try {
 
         // Now we will just return the new JSON that simply does not include the specfic product
-        const deletedProduct = deleteProductFromID(id)
-        res.writeHead(200, {'Content-Type': 'application/json'})
-        res.end(JSON.stringify(deletedProduct))
+        const deletedProduct = await deleteProductFromID(id)
+        console.log(deletedProduct)
+        if (!deletedProduct) {
+            res.writeHead(404, {'Content-Type': 'application/json'})
+            res.end( JSON.stringify({message: 'Product Not Found!'}))
+        }
+        else {
+        res.writeHead(200, {'Content-Type': 'application/json'}) // The application/json automatically, upon recieving the data, parse it into JSON data. IF we used text, then it would have just interpedted it as plain text.
+        // We always send the data as plain Text, as HTTP oly knows how to deal with text.
+        res.end(JSON.stringify(deletedProduct))}
     } catch (error) {
         console.log(error)
         

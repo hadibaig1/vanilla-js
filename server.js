@@ -4,7 +4,6 @@ import {getProducts, getProduct, createProduct, updateProduct, deleteProduct}  f
 
 const PORT = process.env.PORT || 5000
 
-console.log(products)
 const server = http.createServer((req, res) => {
     // Checking the URL
     if (req.url === '/api/products' && req.method === 'GET') {
